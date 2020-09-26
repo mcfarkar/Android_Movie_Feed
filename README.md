@@ -18,7 +18,7 @@ Flix is an app that allows users to browse movies from the [The Movie Database A
 - [ ] (2pts) For popular movies (i.e. a movie voted for more than 5 stars), the full backdrop image is displayed. Otherwise, a poster image, the movie title, and overview is listed. Use Heterogenous RecyclerViews and use different ViewHolder layout files for popular movies and less popular ones.
 
 ### App Walkthough GIF
-<img src="https://i.imgur.com/8YIpZVs.gif" width=250><br>
+<img src="https://imgur.com/a/1tLaH5S.gif" width=250><br>
 
 ### Notes
 The guided part of this unit was easy to follow, so I had no problems there. I had hoped to do more of the stretch projects, but was only able to complete the first 2 items. For the placeholder bonus item, although I used Glide to add a placeholder and added my image to the item_movie.xml, I believe I also need to add something to have it show before the API request is made.
