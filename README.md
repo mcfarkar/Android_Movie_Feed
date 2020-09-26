@@ -20,7 +20,7 @@ Flix is an app that allows users to browse movies from the [The Movie Database A
 ### App Walkthough GIF
 <img src="https://i.imgur.com/8YIpZVs.gif" width=250><br>
 
-![App Walkthough GIF](https://i.imgur.com/8YIpZVs)
+![](https://i.imgur.com/Q2IW4BU.jpg)
 
 ### Notes
 The guided part of this unit was easy to follow, so I had no problems there. I had hoped to do more of the stretch projects, but was only able to complete the first 2 items. For the placeholder bonus item, although I used Glide to add a placeholder and added my image to the item_movie.xml, I believe I also need to add something to have it show before the API request is made.
