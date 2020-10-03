@@ -26,7 +26,7 @@ Flix is an app that allows users to browse movies from the [The Movie Database A
 
 ### Notes
 
-I had trouble getting the YouTube trailer to work. I also got the "There was a problem with the network[400]" error.  I tried some of the solutions offer in the slack, but reating an emulator without Google Play did not work for me. I also checked on stackoverflow. What eventually worked for me was just removing all devices in my AVD Manager and starting fresh.
+I had trouble getting the YouTube player to work in my emulator. Like others, I also got the "There was a problem with the network[400]" error.  I tried some of the solutions offered in the slack, but recreating an emulator without Google Play did not work for me. I also checked on stackoverflow. What eventually worked for me was just removing all devices in my AVD Manager and starting fresh.
 
 ## Open-source libraries used
 - [Android Async HTTP](https://github.com/codepath/CPAsyncHttpClient) - Simple asynchronous HTTP requests with JSON parsing
