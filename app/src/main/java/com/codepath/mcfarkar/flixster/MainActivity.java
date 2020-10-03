@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         // Set the Layout Mgr on the RV
         rvMovies.setLayoutManager(new LinearLayoutManager(this));
 
-        // Create an instance of a client
+        // Create an instance of a client to get movies now playing
         AsyncHttpClient client = new AsyncHttpClient();
         // since the API key is embedded in the URL request, we can just make a get request
         client.get(NOW_PLAYING_URL, new JsonHttpResponseHandler() {
