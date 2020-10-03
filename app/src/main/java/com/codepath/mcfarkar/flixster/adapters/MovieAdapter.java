@@ -1,6 +1,7 @@
 package com.codepath.mcfarkar.flixster.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -8,14 +9,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.codepath.mcfarkar.flixster.DetailActivity;
 import com.codepath.mcfarkar.flixster.R;
 import com.codepath.mcfarkar.flixster.models.Movie;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -61,6 +67,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        RelativeLayout container;
         TextView tvTitle;
         TextView tvOverview;
         ImageView ivPoster;
@@ -71,9 +78,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvOverview = itemView.findViewById(R.id.tvOverview);
             ivPoster = itemView.findViewById(R.id.ivPoster);
+            container = itemView.findViewById(R.id.container);
         }
 
-        public void bind(Movie movie) {
+        public void bind(final Movie movie) {
             tvTitle.setText(movie.getTitle());
             tvOverview.setText(movie.getOverview());
 
@@ -88,6 +96,34 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 imageUrl = movie.getPosterPath();
             }
             Glide.with(context).load(imageUrl).placeholder(R.drawable.comingsoon).into(ivPoster);
+
+            // 1. Register the click listener on the whole container
+            container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 2. Navigate to a new activity on tap using an intent
+
+                        // Initially used a toast to make sure the correct on click activity was occurring
+                        // Toast.makeText(context, movie.getTitle(), Toast.LENGTH_SHORT).show();
+
+                    // provide an Intent (pkg context, the activity we want to navigate to)
+                    // this allows us to go to the Detail Activty when we click on the movie area
+                    Intent i = new Intent(context, DetailActivity.class);
+
+                    // to pass information with the intent
+
+
+                    // example to get items manually
+                    // i.putExtra("title", movie.getTitle());
+                    // however, more efficient to grab entire move object, as shown below
+
+                    i.putExtra("movie", Parcels.wrap(movie));
+
+
+                    context.startActivity(i);
+
+                }
+            });
         }
     }
 
