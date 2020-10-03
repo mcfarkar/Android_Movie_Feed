@@ -1,5 +1,6 @@
 package com.codepath.mcfarkar.flixster.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -14,10 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.codepath.mcfarkar.flixster.DetailActivity;
+import com.codepath.mcfarkar.flixster.MainActivity;
 import com.codepath.mcfarkar.flixster.R;
 import com.codepath.mcfarkar.flixster.models.Movie;
 
@@ -107,7 +110,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                         // Toast.makeText(context, movie.getTitle(), Toast.LENGTH_SHORT).show();
 
                     // provide an Intent (pkg context, the activity we want to navigate to)
-                    // this allows us to go to the Detail Activty when we click on the movie area
+                    // this allows us to go to the Detail Activity when we click on the movie area
                     Intent i = new Intent(context, DetailActivity.class);
 
                     // to pass information with the intent
@@ -118,9 +121,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                     // however, more efficient to grab entire move object, as shown below
 
                     i.putExtra("movie", Parcels.wrap(movie));
+                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                            makeSceneTransitionAnimation((Activity) context,(View)ivPoster, "movie");
+
+                     context.startActivity(i, options.toBundle());
 
 
-                    context.startActivity(i);
+                //   context.startActivity(i);
 
                 }
             });
