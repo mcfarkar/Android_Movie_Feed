@@ -28,6 +28,8 @@ import org.parceler.Parcels;
 
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+
 /**
  * Created by mcfarkar on 24,September,2020
  */
@@ -90,6 +92,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
             String imageUrl;
 
+            int radius = 50; // corner radius, higher value = more rounded
+            int margin = 10; // crop margin, set to 0 for corners with no crop
+
             // if phone in landscape
             if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 // then assign backdrop image
@@ -98,7 +103,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 // else assign poster image
                 imageUrl = movie.getPosterPath();
             }
-            Glide.with(context).load(imageUrl).placeholder(R.drawable.comingsoon).into(ivPoster);
+
+
+            Glide.with(context).load(imageUrl).placeholder(R.drawable.comingsoon)
+                    .transform(new RoundedCornersTransformation(radius, margin))
+                    .into(ivPoster);
 
             // 1. Register the click listener on the whole container
             container.setOnClickListener(new View.OnClickListener() {
