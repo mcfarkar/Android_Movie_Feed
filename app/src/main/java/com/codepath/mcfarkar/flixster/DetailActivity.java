@@ -26,11 +26,14 @@ public class DetailActivity extends YouTubeBaseActivity {
     private static final String YOUTUBE_API_KEY = "AIzaSyDH_Jx7IWGwux5DtSfgN4g9R68zymsCwUE";
     public static final String VIDEOS_URL = "https://api.themoviedb.org/3/movie/%d/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
 
+
     // Declare variables to associate view items and intent data
     TextView tvTitle;
     TextView tvOverview;
     RatingBar ratingBar;
     YouTubePlayerView youTubePlayerView;
+
+
 
 
     @Override
@@ -50,10 +53,12 @@ public class DetailActivity extends YouTubeBaseActivity {
         // however, more efficient to grab entire move object, as shown below
 
         // Parceler allows us to pass in the whole move in an intent and have access to all of its attributes
-        Movie movie = Parcels.unwrap(getIntent().getParcelableExtra("movie"));
+        final Movie movie = Parcels.unwrap(getIntent().getParcelableExtra("movie"));
         tvTitle.setText(movie.getTitle());
         tvOverview.setText(movie.getOverview());
         ratingBar.setRating((float) movie.getRating());
+
+
 
 
         // Create an instance of a client
@@ -72,7 +77,8 @@ public class DetailActivity extends YouTubeBaseActivity {
                     String youtubeKey = results.getJSONObject(0).getString("key");
                     Log.d( "DetailActivity", youtubeKey);
 
-                    initializeYoutube(youtubeKey);
+
+                    initializeYoutube(youtubeKey, movie.getRating());
 
                 } catch (JSONException e) {
                     Log.e( "DetailActivity", "Failed to parse JSON" , e);
@@ -92,14 +98,26 @@ public class DetailActivity extends YouTubeBaseActivity {
 
     }
 
-    private void initializeYoutube(final String youtubeKey) {
+    private void initializeYoutube(final String youtubeKey, final double moviePopularity) {
         youTubePlayerView.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 Log.d("DetailActivity", "onInitializationSuccess");
 
                 // do any work here to cue video, play video, etc.
-                youTubePlayer.cueVideo(youtubeKey);
+
+                if (moviePopularity < 6.5)
+                {
+                    // show an image preview that can initiate playing a YouTube video.
+                    youTubePlayer.cueVideo(youtubeKey);
+                }
+                else {
+
+                    //  otherwise when clicking on a popular movie (i.e. 5+ stars) the video should be played immediately.
+                    youTubePlayer.loadVideo(youtubeKey);
+                }
+
+
             }
 
             @Override
